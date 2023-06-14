@@ -1,5 +1,10 @@
 # Databricks notebook source
-# MAGIC %pip install mlflow>=2.3
+# MAGIC %md
+# MAGIC ![Name of the image](https://raw.githubusercontent.com/fmunz/vinyldreams/master/img/rec8.png)
+
+# COMMAND ----------
+
+# MAGIC %pip install mlflow=2.4.1
 # MAGIC
 
 # COMMAND ----------
@@ -46,13 +51,20 @@ getDesc("Beyoncé")
 # COMMAND ----------
 
 data = spark.sql("select * from dais.vinyl.records")
-
-data = data.withColumn('description', sql_desc("artist"))
-
-# COMMAND ----------
-
 display(data)
 
 # COMMAND ----------
 
-data.write.mode('overwrite').saveAsTable("dais.vinyl.records")
+# add LLM generated description
+data = data.withColumn('description', sql_desc("artist"))
+
+# COMMAND ----------
+
+# we have a schema change because of the new column - > option("overwriteSchema", "true")
+data.write.mode('overwrite').option("overwriteSchema", "true").saveAsTable("dais.vinyl.records")
+
+# COMMAND ----------
+
+# MAGIC %sql 
+# MAGIC
+# MAGIC select * from dais.vinyl.records

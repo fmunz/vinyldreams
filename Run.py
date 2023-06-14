@@ -1,13 +1,6 @@
 # Databricks notebook source
-from IPython.display import Image 
-from IPython.core.display import HTML 
-Image(url= "dbfs:/data/vinyl/images/rec1.png")
-
-
-# COMMAND ----------
-
 # MAGIC %md
-# MAGIC ![Name of the image](img/rec1.png)
+# MAGIC ![Name of the image](https://raw.githubusercontent.com/fmunz/vinyldreams/master/img/rec1.png)
 
 # COMMAND ----------
 
@@ -31,6 +24,7 @@ Image(url= "dbfs:/data/vinyl/images/rec1.png")
 # MAGIC rm -rf /dbfs/data/vinyl
 # MAGIC mkdir -p /dbfs/data/vinyl/images
 # MAGIC mkdir -p /dbfs/data/vinyl/contract
+# MAGIC mkdir -p /dbfs/data/vinyl/incoming
 
 # COMMAND ----------
 
@@ -43,7 +37,7 @@ Image(url= "dbfs:/data/vinyl/images/rec1.png")
 
 # COMMAND ----------
 
-# MAGIC %sh cp delivery*.csv /dbfs/data/vinyl/incoming
+# MAGIC %sh cp misc/delivery*.csv /dbfs/data/vinyl/incoming/
 
 # COMMAND ----------
 
@@ -52,9 +46,14 @@ Image(url= "dbfs:/data/vinyl/images/rec1.png")
 
 # COMMAND ----------
 
+# MAGIC %sql
+# MAGIC describe table dais.vinyl.records
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC create contract in contract bucket
 
 # COMMAND ----------
 
-
+# cp contract to S3 location
