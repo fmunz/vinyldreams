@@ -4,11 +4,7 @@
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC drop schema dais.vinyl cascade;
-# MAGIC create catalog IF NOT EXISTS dais;
-# MAGIC create schema IF NOT EXISTS dais.vinyl;
-# MAGIC use dais.vinyl;
+# run with 13.x dbr
 
 # COMMAND ----------
 
@@ -22,22 +18,22 @@
 # MAGIC %sh
 # MAGIC
 # MAGIC rm -rf /dbfs/data/vinyl
-# MAGIC mkdir -p /dbfs/data/vinyl/images
-# MAGIC mkdir -p /dbfs/data/vinyl/contract
+# MAGIC
+# MAGIC # mkdir -p /dbfs/data/vinyl/contract
 # MAGIC mkdir -p /dbfs/data/vinyl/incoming
+# MAGIC
 
 # COMMAND ----------
 
 # MAGIC %sh 
-# MAGIC mkdir -p /dbfs/data/vinyl/images
+# MAGIC
+# MAGIC cp misc/delivery*.csv /dbfs/data/vinyl/incoming/
+# MAGIC ls /dbfs/data/vinyl/incoming
 
 # COMMAND ----------
 
-# MAGIC %sh ls /dbfs/data/vinyl
-
-# COMMAND ----------
-
-# MAGIC %sh cp misc/delivery*.csv /dbfs/data/vinyl/incoming/
+# MAGIC %md 
+# MAGIC # [Jump to Workflow](https://e2-dogfood.staging.cloud.databricks.com/?o=6051921418418893#job/698901831183271/tasks)
 
 # COMMAND ----------
 
@@ -46,14 +42,5 @@
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC describe table dais.vinyl.records
-
-# COMMAND ----------
-
 # MAGIC %md
-# MAGIC create contract in contract bucket
-
-# COMMAND ----------
-
-# cp contract to S3 location
+# MAGIC OPTIONAL: create a contract file and start workflow when it arrives.

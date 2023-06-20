@@ -10,24 +10,34 @@
 
 # COMMAND ----------
 
+# MAGIC %sql
+# MAGIC drop schema IF EXISTS dais.vinyl cascade;
+# MAGIC create schema dais.vinyl;
+
+# COMMAND ----------
 
 
 df = spark.read.format("csv") \
   .option("header", "true") \
   .option("inferSchema", "true") \
-  .load("dbfs:/data/vinyl/incoming")
+  .load("/data/vinyl/incoming")
 
 
 
 # COMMAND ----------
 
-df.write.format("delta").saveAsTable("dais.vinyl.records")
+display(df)
+
+# COMMAND ----------
+
+df.write.format("delta").mode("overwrite").saveAsTable("dais.vinyl.records")
 
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC USE dais.vinyl;
+# MAGIC ALTER TABLE records ADD COLUMNS (description string);
 # MAGIC SELECT * FROM records LIMIT 3 ;
 
 # COMMAND ----------
