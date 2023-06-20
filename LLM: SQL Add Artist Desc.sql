@@ -6,13 +6,6 @@
 
 USE dais.vinyl;
 
-
-
--- COMMAND ----------
-
--- update records set description = "" 
--- SELECT * from records LIMIT 3
-
 -- COMMAND ----------
 
 -- MAGIC %md
@@ -27,7 +20,7 @@ USE dais.vinyl;
 
 -- COMMAND ----------
 
--- with parameter, this is what we want
+-- create SQL function that accepts artist
 CREATE OR REPLACE FUNCTION ARTIST_DESC(artist STRING) RETURNS STRING RETURN  
 ai_generate_text(
   CONCAT('desribe the music artist in 2 sentences: ', artist),'azure_openai/gpt-35-turbo',
@@ -67,7 +60,3 @@ UPDATE records set description = artist_desc(artist)
 -- check for the inserted description
 
 SELECT * FROM records
-
--- COMMAND ----------
-
-
