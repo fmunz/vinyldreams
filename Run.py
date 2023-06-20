@@ -28,3 +28,14 @@
 
 # MAGIC %md 
 # MAGIC # > [Jump to Workflow](https://e2-dogfood.staging.cloud.databricks.com/?o=6051921418418893#job/698901831183271/tasks)
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC -- run on SQL DWH
+# MAGIC -- GRANT SELECT ON ANY FILE TO `user@databricks.com`
+# MAGIC -- GRANT ALL PRIVILEGES ON TABLE dais.vinyl.records TO  `roland.faustlin@databricks.com`
+
+# COMMAND ----------
+
+
