@@ -11,18 +11,26 @@
 
 # COMMAND ----------
 
-# MAGIC %sh
-# MAGIC
-# MAGIC rm -rf /dbfs/data/vinyl
-# MAGIC mkdir -p /dbfs/data/vinyl/incoming
-# MAGIC
+# MAGIC %sql
+# MAGIC DROP VOLUME IF EXISTS dais.vinyl.vinyl_volume;
+# MAGIC CREATE VOLUME dais.vinyl.vinyl_volume;
 
 # COMMAND ----------
 
-# MAGIC %sh 
-# MAGIC
-# MAGIC cp misc/delivery*.csv /dbfs/data/vinyl/incoming/
-# MAGIC ls /dbfs/data/vinyl/incoming
+
+!cp misc/delivery*.csv /Volumes/dais/vinyl/vinyl_volume
+!ls /Volumes/dais/vinyl/vinyl_volume
+
+# COMMAND ----------
+
+!cat /Volumes/dais/vinyl/vinyl_volume/delivery-oct-2023.csv
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC USE CATALOG dais;
+# MAGIC USE SCHEMA vinyl;
+# MAGIC UPDATE records SET year='2023' WHERE artist = 'U2'
 
 # COMMAND ----------
 
@@ -35,7 +43,3 @@
 # MAGIC -- run on SQL DWH
 # MAGIC -- GRANT SELECT ON ANY FILE TO `user@databricks.com`
 # MAGIC -- GRANT ALL PRIVILEGES ON TABLE dais.vinyl.records TO  `roland.faustlin@databricks.com`
-
-# COMMAND ----------
-
-
