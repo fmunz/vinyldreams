@@ -19,6 +19,6 @@ Workflows with job task type etc.
 
 
 ## Databricks Workflows (Matrix View)
-Matrix view is great to check what happens. Also for debugging.
+Matrix view is great to check which tasks are triggered. Also for debugging.
 ![Workflows Matrix](https://raw.githubusercontent.com/fmunz/vinyldreams/master/img/matrix.png)
 
